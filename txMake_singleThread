@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Define the target directory
+cwd=$(pwd)
+
+# Check if the target is not a directory
+if [ ! -d "$cwd" ]; then
+  exit 1
+fi
+
+# Loop through files in the target directory
+for file in "$cwd"/*; do
+  if [ -f "$file" ] && [ "${file##*.}" == "exr" ]; then 
+	filename=$(basename -- "$file")
+	extension="${file##*.}"
+	filename="${file%.*}"
+	txmake -t:30 -mode periodic -format openexr -newer $file $filename.tex
+    echo "$file"
+  fi
+done
