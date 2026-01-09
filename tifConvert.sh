@@ -1,0 +1,2 @@
+for file in *.tex; do oiio_iconvert "$file" "$file.exr"; done
+echo "All conversion completed."
